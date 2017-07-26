@@ -1,15 +1,36 @@
 let contactStorage = []
 
 const addContact = function(firstName, lastName, email){
-  console.log('addContact', 'TODO')
+  contactStorage.push({fullName: firstName + " " + lastName, email: email})
+  //console.log('addContact', 'TODO')
 }
 
-const addContacts = function(contacts){
-  console.log('addContacts:', 'TODO')
+const addContacts = function(data){
+  console.log('Loading...')
+  for(let i = 0; i < data.length; i++){
+    addContact(data[i].first_name, data[i].last_name, data[i].email)
+  }
+  console.log('...Finished loading data for contacts')
 }
 
-const printContacts = function(){
-  console.log('printContacts:', 'TODO')
+const printContacts = function(contacts){
+  console.log('All contacts:')
+  console.log('|-----------------------------------|')
+  console.log('| Full Name (Email Address)')
+  console.log('|-----------------------------------|')
+  contacts.sort(function(a, b){
+    if(a.fullName < b.fullName){
+      return -1
+    }
+    if(a.fullName > b.fullName){
+      return 1
+    }
+    return 0
+  })
+  for(let i = 0; i < contacts.length; i++){
+    console.log('| '+contacts[i].fullName+' ('+contacts[i].email')')
+  }
+  console.log('|-----------------------------------|')
 }
 
 addContacts([
@@ -115,4 +136,4 @@ addContacts([
   },
 ])
 
-printContacts()
+printContacts(contactStorage)
